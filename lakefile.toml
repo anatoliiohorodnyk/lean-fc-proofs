@@ -1,0 +1,30 @@
+name = "fcproofs"
+defaultTargets = ["Proofs"]
+
+[leanOptions]
+autoImplicit = false
+relaxedAutoImplicit = false
+pp.unicode.fun = true
+
+[[require]]
+name = "formal_conjectures"
+git = "https://github.com/google-deepmind/formal-conjectures"
+rev = "df3f12d7bd06feb3f71ae37abae0ca7cb798d9b1"
+
+[[lean_lib]]
+name = "Warmup"
+
+# Same per-library options as upstream FormalConjectures, so copies elaborate identically.
+[[lean_lib]]
+name = "Proofs"
+globs = ["Proofs.+"]
+[lean_lib.leanOptions]
+warn.sorry = false
+weak.google.answer = "always_true"
+
+[[lean_lib]]
+name = "Challenges"
+globs = ["Challenges.+"]
+[lean_lib.leanOptions]
+warn.sorry = false
+weak.google.answer = "always_true"
