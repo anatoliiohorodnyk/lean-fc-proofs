@@ -1,0 +1,11 @@
+vertices 15 edges 30
+triangles: [] -> triangle-free: True
+degrees by vertex: [5, 6, 4, 6, 5, 4, 3, 3, 4, 3, 6, 5, 2, 2, 2]
+degree sequence (sorted): [6, 6, 6, 5, 5, 5, 4, 4, 4, 3, 3, 3, 2, 2, 2]
+degree multiplicities: {2: 3, 3: 3, 4: 3, 5: 3, 6: 3} f = 3
+k=1 colourable: False
+k=2 colourable: False
+k=3 colourable: False
+k=4 colourable: True  witness (0, 1, 0, 1, 2, 0, 1, 0, 1, 2, 3, 2, 0, 0, 0)
+chromatic number = 4
+graph6: NhdLA_gc?NqcQ??BI??
