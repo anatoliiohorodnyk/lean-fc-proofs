@@ -1,14 +1,15 @@
 # A Lean 4 proof of the Lovász–Plummer bound with constant 1/983
 
 Every bridgeless cubic graph on `n` vertices has at least `2^(n/983)` perfect matchings.
-This directory holds the Lean 4 file that proves it, the logs of its verification, and the
-inputs it was generated from. The file follows Esperet, Kardoš, King, Král' and Norine,
+The Lean 4 proof is the file [`Proofs/T_LovaszPlummerConjecture_lovasz_plummer_conjecture_variants_explicit.lean`](../Proofs/T_LovaszPlummerConjecture_lovasz_plummer_conjecture_variants_explicit.lean) of this repository; this
+document describes it. The proof follows Esperet, Kardoš, King, Král' and Norine,
 *Exponentially many perfect matchings in cubic graphs*, Adv. Math. 227 (2011), 1646–1664
-(arXiv:1012.2878), with the changes listed in the pull-request description
-(`../release_983/pr_6854_description.md`).
+(arXiv:1012.2878), with the changes listed in the description of the pull request
+[google-deepmind/formal-conjectures #6854](https://github.com/google-deepmind/formal-conjectures/pull/6854).
 
-Status: checked by the Lean kernel and by `leanprover/comparator` on 2026-10-06
-(`JUDGE: PASS`, tag `explicit-983-pub`). Nothing in this directory has been published yet.
+Status: published. The file was checked by the Lean kernel and by `leanprover/comparator` on
+2026-10-06 (`JUDGE: PASS`) and is in this repository (anatoliiohorodnyk/lean-fc-proofs) since
+commit `e1059f02264088e9fc4e2866855b8cf68d9cbeda`. The pull request above links it from the statement in formal-conjectures.
 
 ## The two theorems
 
@@ -53,11 +54,16 @@ The theorem file of formal-conjectures at the pinned commit is byte-identical to
 
 ## Building
 
-In a Lake project that requires formal-conjectures at the commit above (same toolchain), with
-the file as `Proofs/LovaszPlummerConjecture_explicit_983.lean` in a library `Proofs`:
+This repository is a Lake project (`lakefile.toml`) that requires formal-conjectures at the
+commit above; `lean-toolchain` and `lake-manifest.json` pin the versions of the table. The
+library `Proofs` contains every file of `Proofs/`, and it is the default target, so name the
+module to build this file only:
 
     lake exe cache get          # Mathlib build products
-    lake build Proofs.LovaszPlummerConjecture_explicit_983
+    lake build Proofs.T_LovaszPlummerConjecture_lovasz_plummer_conjecture_variants_explicit
+
+(A plain `lake build` builds all proofs of the repository.) The library is configured with
+`warn.sorry = false`, so the three statements left as `sorry` produce no warning.
 
 Measured on the build host (one `lean` process; the file is elaborated sequentially):
 
@@ -73,16 +79,16 @@ About 22 of the 26 minutes are the kernel evaluation of the certificate checks.
     'LovaszPlummerConjecture.lovasz_plummer_conjecture.variants.explicit' depends on axioms:
     [propext, Classical.choice, Quot.sound]
 
-(from `lp_explicit_983_pub_check.log`). `lovasz_plummer_explicit_internal` is used by the target,
+(from the log of the check). `lovasz_plummer_explicit_internal` is used by the target,
 so its axioms are among these three. There is no `sorryAx`, no `native_decide`, no
 `Lean.ofReduceBool`: every `decide` in the file is `decide +kernel`, evaluated by the kernel.
 The comparator additionally checks that the statement and all definitions it depends on are
-those of the formal-conjectures file (`lp_explicit_983_pub_judge.log`).
+those of the formal-conjectures file.
 
 ## Map of the file (34 326 lines)
 
 Multigraphs are given by an edge type `E`, end maps `α β : E → W` and a vertex set
-`L : Finset W`. Line numbers are those of `LovaszPlummerConjecture_explicit_983.lean`.
+`L : Finset W`. Line numbers are those of `Proofs/T_LovaszPlummerConjecture_lovasz_plummer_conjecture_variants_explicit.lean`.
 
 | lines | content | main declarations |
 |---|---|---|
@@ -96,7 +102,7 @@ Multigraphs are given by an edge type `E`, end maps `α β : E → W` and a vert
 | 24 739–25 160 | sizes of leaves, atoms and chains by the size of the cut; a second burl in a chain with a 2-cut at an end; three more coverage statements | `ep_chain_size_cut` (24858), `ep_chain_burl_top2` (25072), `lpTree_covF1a/F1b/F2` (25147–25153) |
 | 25 159–25 600 | graphs without a core (Lemma 11, Corollary 12) | `ep_lemma11` (25209), `ep_cor12` (25590) |
 | 25 600–27 400 | splitting along a path (Lemmas 23/24); pruning with a budget; local structure of a cyclically 4-edge-connected graph | `epSp_cut_ge_two` (25998), `ep_prune_budget` (26755), `ep_cyc4_local` (27259) |
-| 27 406–31 434 | the splitting lever: sets with a 5-cut (the classification called Theorem D below), 18 certificates, bad splits and the good choice, the foliage lift with loss `2β₁ − β₂` | `ep_cut4_burl_cyc4` (27887), `ep_cut5_reduce` (28438), `ep_burl_of_model` (28836), `ep_cut5_burl` (29623), `ep_good_choice` (30802), `ep_cyc4_local_good` (31202), `epSp_fol_good` (31254) |
+| 27 406–31 434 | the splitting lever: sets with a 5-cut, 18 certificates, bad splits and the good choice, the foliage lift with loss `2β₁ − β₂` | `ep_cut4_burl_cyc4` (27887), `ep_cut5_reduce` (28438), `ep_burl_of_model` (28836), `ep_cut5_burl` (29623), `ep_good_choice` (30802), `ep_cyc4_local_good` (31202), `epSp_fol_good` (31254) |
 | 31 435–33 296 | graphs with a core (Lemma 13/14): one split, Case 1 by four splits, core partitions, Case 2 | `ep_split_package` (31435), `ep_l13_cyc4` (31562), `ep_l13_case2a` (32445), `ep_cyc4_fol_avoid` (32908), `ep_l13_case2b` (33059), `ep_lemma13` (33218) |
 | 33 296–34 241 | pruning with the dichotomy (factor 2.5), counting from a foliage, the bound for connected multigraphs | `ep_prune_dich` (34113), `ep_fol0_count` (34136), `lp_multigraph_bound` (34162) |
 | 34 242–34 326 | the corollary, the original statements, the target | `lovasz_plummer_explicit_internal`, `lovasz_plummer_conjecture.variants.explicit` |
@@ -139,33 +145,29 @@ search; those programs are not part of the proof.
 
 ## Provenance
 
-The file is generated, not written by hand:
+The file is generated, not written by hand. A script (`lp_assemble.py`, variant `E1p`) takes
+the helper text of the 1/4749 proof, substitutes the constants, patches a fixed list of declarations, and
+inserts the new modules and the certificate data. **The generator, its inputs and the logs of
+the check and of the comparator are not in this repository**; they are in the author's working
+repositories. Two of the inputs are pinned by hash and asserted by the script:
 
-    LP_DATA=lpD_final_real_1393def.lean python3 lp_assemble.py E1p real
-
-`lp_assemble.py` (in this directory; variant `E1p`) takes the helper text of the 1/4749 proof,
-substitutes the constants, patches a fixed list of declarations, and inserts the modules.
-Inputs added since `explicit-1308` are pinned by hash and asserted by the script:
-
-| input | sha256 |
+| | sha256 |
 |---|---|
-| `lpL2_root_pinned.lean` (sizes by cut, second burl) | `0769b7f52ab03eb57fbab64ca9b65edc20fad4fab769fce971cff82eb016f66e` |
-| `lpL2_lever2_pinned.lean` (the splitting lever) | `15c4ab67b7ceb3093d5bd80379e8a3c058d448a4f0247bfbda7e022774bbbd8d` |
-| result `LovaszPlummerConjecture_explicit_983.lean` | `9fac21f493a4a226769a13443245a4c6ccf9064e8e3ef483fa5a602cb14f4a7e` |
+| input: sizes by cut, second burl | `0769b7f52ab03eb57fbab64ca9b65edc20fad4fab769fce971cff82eb016f66e` |
+| input: the splitting lever | `15c4ab67b7ceb3093d5bd80379e8a3c058d448a4f0247bfbda7e022774bbbd8d` |
+| result: `Proofs/T_LovaszPlummerConjecture_lovasz_plummer_conjecture_variants_explicit.lean` | `9fac21f493a4a226769a13443245a4c6ccf9064e8e3ef483fa5a602cb14f4a7e` |
 
-The other inputs (original file, helper base, the modules, the 1393 certificates) are in
-`../explicit_1308/` and unchanged since.
+Earlier states that passed the same check and comparator run (the names are tags of the
+author's working repositories, not of this one):
 
-Earlier judged states, each tagged in both repositories:
-
-| tag | internal constant | what was new |
+| state | internal constant | what was new |
 |---|---|---|
-| (2026-10-04, published) | 1/4749 | the existence statement `lovasz_plummer_conjecture` |
+| published 2026-10-04, `Proofs/T_LovaszPlummerConjecture_lovasz_plummer_conjecture.lean` | 1/4749 | the existence statement `lovasz_plummer_conjecture` |
 | `explicit-1308` | 1/1308 | certified chains of ten nodes, pruning factor 2.5, exact vertex count in Lemma 14 |
 | `explicit-1289` | 1/1289 | exact branching step in Lemma 11 |
 | `explicit-1152` | 1/1152 | sizes by cut, root case of Lemma 11 |
 | `explicit-983` | 1/983 | the splitting lever |
-| `explicit-983-pub` | 1/983 | this file: the `explicit-983` text with comments and docstrings cleaned (`diff_against_983.diff`: 25 comment lines; no statement or proof line differs); checked and judged again |
+| `explicit-983-pub` | 1/983 | this file: the `explicit-983` text with comments and docstrings cleaned (25 comment lines; no statement or proof line differs); checked and judged again |
 
-Files here: the Lean file; `lp_explicit_983_pub_check.log`, `lp_explicit_983_pub_judge.log`;
-`lp_assemble.py`; the two pinned modules; `diff_against_983.diff`.
+Files in this repository that belong to this proof: `Proofs/T_LovaszPlummerConjecture_lovasz_plummer_conjecture_variants_explicit.lean` and this document
+(`docs/LovaszPlummer_983.md`).
