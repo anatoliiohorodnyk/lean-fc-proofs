@@ -1,0 +1,5 @@
+decl: SimpleGraph.F_four_le
+file: FormalConjectures/Paper/DegreeSequencesTriangleFree.lean
+formal_conjectures_rev: df3f12d7bd06feb3f71ae37abae0ca7cb798d9b1
+toolchain: leanprover/lean4:v4.33.1
+judged_at: 2026-10-09T09:06:28+00:00

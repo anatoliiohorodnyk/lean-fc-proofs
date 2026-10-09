@@ -1,0 +1,29 @@
+Building Challenges.T_SimpleGraph_F_three
+✔ [8935/8935] Built Challenges.T_SimpleGraph_F_three (21s)
+Build completed successfully (8935 jobs).
+Exporting #[Quot, Quot.mk, Quot.lift, Quot.ind, SimpleGraph.F_three, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce, Nat, String, String.mk, Char, optParam, autoParam, semiOutParam, outParam] from Challenges.T_SimpleGraph_F_three
+Building Proofs.T_SimpleGraph_F_three
+⚠ [8935/8935] Built Proofs.T_SimpleGraph_F_three (323s)
+warning: Proofs/T_SimpleGraph_F_three.lean:322:0: Definition `SimpleGraph.efs3Dec` of class type is semireducible. Most type class instances should be instance-reducible, so consider marking this
+definition with `@[instance_reducible]`. If it is intentionally semireducible, this warning can be disabled with `set_option warn.classDefReducibility false`.
+warning: Proofs/T_SimpleGraph_F_three.lean:390:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Proofs/T_SimpleGraph_F_three.lean:404:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+Build completed successfully (8935 jobs).
+Exporting #[Quot, Quot.mk, Quot.lift, Quot.ind, SimpleGraph.F_three, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce, Nat, String, String.mk, Char, optParam, autoParam, semiOutParam, outParam] from Proofs.T_SimpleGraph_F_three
+Running Lean default kernel on solution.
+Lean default kernel accepts the solution
+Your solution is okay!

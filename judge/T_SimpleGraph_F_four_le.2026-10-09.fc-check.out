@@ -1,0 +1,4 @@
+'SimpleGraph.F_four_le' depends on axioms: [propext, Classical.choice, Quot.sound] .check/T_SimpleGraph_F_four_le.lean:2:0: warning: This file has no module docstring (`/-! ... -/`). Add one after the imports to document the file. Note: This linter can be disabled with `set_option linter.style.moduleDocstring false` 
+STATUS: PASS
+peak memory of the build: 0.2 GB
+Level-1 passed. Next: fc judge T_SimpleGraph_F_four_le
